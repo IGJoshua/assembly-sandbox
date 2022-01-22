@@ -36,7 +36,7 @@ echo: $(BUILDDIR)/echo.o
 
 .PHONY: power
 power: $(BUILDDIR)/power.o
-	$(CCLD) -o $(BUILDDIR)/$@ $<
+	$(CC) -o $(BUILDDIR)/$@ $<
 
 .PHONY: sum
 sum: $(BUILDDIR)/sum.o $(SRCDIR)/callsum.c

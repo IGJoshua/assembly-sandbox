@@ -29,13 +29,13 @@ main:
     ;; value of the base, and eax to hold the running product.
 
     mov     rdi, [r12+16]       ; argv[2]
-    call    atoi                ; y in eax
+    call    [rel atoi wrt ..got] ; y in eax
     cmp     eax, 0              ; disallow negative exponents
     jl      error2
     mov     r13d, eax           ; y in r13d
 
     mov     rdi, [r12+8]        ; argv
-    call    atoi                ; x in eax
+    call    [rel atoi wrt ..got] ; x in eax
     mov     r14d, eax           ; x in r14d
 
     mov     eax, 1              ; start with answer = 1
@@ -46,18 +46,18 @@ check:
     dec     r13d
     jmp     check
 gotit:                          ; print report on success
-    mov     rdi, answer
+    lea     rdi, [rel answer]
     movsxd  rsi, eax
     mov     rax, 0
-    call    printf
+    call    [rel printf wrt ..got]
     jmp     done
 error1:                         ; print error message
-    mov     edi, badArgumentCount
-    call    puts
+    lea     rdi, [rel badArgumentCount]
+    call    [rel puts wrt ..got]
     jmp     done
 error2:                         ; print error message
-    mov     edi, negativeExponent
-    call    puts
+    lea     rdi, [rel negativeExponent]
+    call    [rel puts wrt ..got]
 done:                           ; restore saved registers
     pop     r14
     pop     r13

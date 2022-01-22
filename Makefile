@@ -48,11 +48,11 @@ average: $(BUILDDIR)/average.o
 
 .PHONY: factorial
 factorial: $(BUILDDIR)/factorial.o $(SRCDIR)/callfactorial.c
-	$(CCLD) -o $(BUILDDIR)/$@ $^
+	$(CC) -o $(BUILDDIR)/$@ $^
 
 .PHONY: add_four_floats
 add_four_floats: $(BUILDDIR)/add_four_floats.o $(SRCDIR)/test_add_four_floats.c
-	$(CCLD) -o $(BUILDDIR)/$@ $^
+	$(CC) -o $(BUILDDIR)/$@ $^
 
 .PHONY: clean
 clean:

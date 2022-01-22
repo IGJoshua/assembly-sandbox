@@ -5,8 +5,6 @@ CC = gcc
 LD = ld
 ASM = nasm -felf64
 
-CCLD = gcc -no-pie
-
 $(BUILDDIR)/%.o: $(SRCDIR)/%.asm
 	$(ASM) -o $@ $<
 
@@ -53,6 +51,10 @@ factorial: $(BUILDDIR)/factorial.o $(SRCDIR)/callfactorial.c
 .PHONY: add_four_floats
 add_four_floats: $(BUILDDIR)/add_four_floats.o $(SRCDIR)/test_add_four_floats.c
 	$(CC) -o $(BUILDDIR)/$@ $^
+
+.PHONY: satexample
+satexample: $(BUILDDIR)/satexample.o
+	$(CC) -o $(BUILDDIR)/$@ $<
 
 .PHONY: clean
 clean:

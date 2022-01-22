@@ -40,7 +40,7 @@ power: $(BUILDDIR)/power.o
 
 .PHONY: sum
 sum: $(BUILDDIR)/sum.o $(SRCDIR)/callsum.c
-	$(CCLD) -o $(BUILDDIR)/$@ $^
+	$(CC) -o $(BUILDDIR)/$@ $^
 
 .PHONY: average
 average: $(BUILDDIR)/average.o

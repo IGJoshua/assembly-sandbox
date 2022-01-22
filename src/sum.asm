@@ -11,7 +11,7 @@
     global sum
     section .text
 sum:
-    movq    xmm0, [empty]       ; initialize the sum to 0
+    movq    xmm0, [rel empty]   ; initialize the sum to 0
     cmp     rsi, 0              ; special case for length = 0
     je      done
 next:

@@ -1,12 +1,58 @@
 SRCDIR = src
 BUILDDIR = target
 
+CC = gcc
+LD = ld
+ASM = nasm -felf64
+
+CCLD = gcc -no-pie
+
 $(BUILDDIR)/%.o: $(SRCDIR)/%.asm
-	nasm -felf64 -o $@ $<
+	$(ASM) -o $@ $<
 
 .PHONY: hello
 hello: $(BUILDDIR)/hello.o
-	ld -o $(BUILDDIR)/$@ $<
+	$(LD) -o $(BUILDDIR)/$@ $<
+
+.PHONY: stars
+stars: $(BUILDDIR)/stars.o
+	$(LD) -o $(BUILDDIR)/$@ $<
+
+.PHONY: hello_c
+hello_c: $(BUILDDIR)/hello_c.o
+	$(CCLD) -o $(BUILDDIR)/$@ $<
+
+.PHONY: fib
+fib: $(BUILDDIR)/fib.o
+	$(CCLD) -o $(BUILDDIR)/$@ $<
+
+.PHONY: maxofthree
+maxofthree: $(BUILDDIR)/maxofthree.o $(SRCDIR)/callmaxofthree.c
+	$(CCLD) -o $(BUILDDIR)/$@ $^
+
+.PHONY: echo
+echo: $(BUILDDIR)/echo.o
+	$(CCLD) -o $(BUILDDIR)/$@ $<
+
+.PHONY: power
+power: $(BUILDDIR)/power.o
+	$(CCLD) -o $(BUILDDIR)/$@ $<
+
+.PHONY: sum
+sum: $(BUILDDIR)/sum.o $(SRCDIR)/callsum.c
+	$(CCLD) -o $(BUILDDIR)/$@ $^
+
+.PHONY: average
+average: $(BUILDDIR)/average.o
+	$(CCLD) -o $(BUILDDIR)/$@ $<
+
+.PHONY: factorial
+factorial: $(BUILDDIR)/factorial.o $(SRCDIR)/callfactorial.c
+	$(CCLD) -o $(BUILDDIR)/$@ $^
+
+.PHONY: add_four_floats
+add_four_floats: $(BUILDDIR)/add_four_floats.o $(SRCDIR)/test_add_four_floats.c
+	$(CCLD) -o $(BUILDDIR)/$@ $^
 
 .PHONY: clean
 clean:

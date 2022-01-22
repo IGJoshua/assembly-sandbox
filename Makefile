@@ -44,7 +44,7 @@ sum: $(BUILDDIR)/sum.o $(SRCDIR)/callsum.c
 
 .PHONY: average
 average: $(BUILDDIR)/average.o
-	$(CCLD) -o $(BUILDDIR)/$@ $<
+	$(CC) -o $(BUILDDIR)/$@ $<
 
 .PHONY: factorial
 factorial: $(BUILDDIR)/factorial.o $(SRCDIR)/callfactorial.c

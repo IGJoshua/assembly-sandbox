@@ -22,7 +22,7 @@ accumulate:
     push    rdi                 ; save register across call to atoi
     push    rsi
     mov     rdi, [rsi+rdi*8]    ; argv[rdi]
-    call    atoi                ; now rax has the int value of arg
+    call    [rel atoi wrt ..got] ; now rax has the int value of arg
     pop     rsi                 ; restore registers after atoi call
     pop     rdi
     add     [sum], rax          ; accumulate sum as we go
@@ -32,19 +32,19 @@ average:
     cvtsi2sd xmm0, [sum]
     cvtsi2sd xmm1, [count]
     divsd   xmm0, xmm1          ; xmm0 is sum/count
-    mov     rdi, format         ; 1st arg to printf
+    lea     rdi, [rel format]   ; 1st arg to printf
     mov     rax, 1              ; printf is varargs, there is 1 non-int argument
 
     sub     rsp, 8              ; align stack pointer
-    call    printf              ; printf(format, sum/count)
+    call    [rel printf wrt ..got] ; printf(format, sum/count)
     add     rsp, 8              ; restore stack pointer
 
     ret
 
 nothingToAverage:
-    mov     rdi, error
+    lea     rdi, [rel error]
     mov     rax, 0
-    call    printf
+    call    [rel printf wrt ..got]
     ret
 
     section .data

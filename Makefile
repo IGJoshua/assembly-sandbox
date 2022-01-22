@@ -28,7 +28,7 @@ fib: $(BUILDDIR)/fib.o
 
 .PHONY: maxofthree
 maxofthree: $(BUILDDIR)/maxofthree.o $(SRCDIR)/callmaxofthree.c
-	$(CCLD) -o $(BUILDDIR)/$@ $^
+	$(CC) -o $(BUILDDIR)/$@ $^
 
 .PHONY: echo
 echo: $(BUILDDIR)/echo.o

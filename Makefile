@@ -20,7 +20,7 @@ stars: $(BUILDDIR)/stars.o
 
 .PHONY: hello_c
 hello_c: $(BUILDDIR)/hello_c.o
-	$(CCLD) -o $(BUILDDIR)/$@ $<
+	$(CC) -o $(BUILDDIR)/$@ $<
 
 .PHONY: fib
 fib: $(BUILDDIR)/fib.o

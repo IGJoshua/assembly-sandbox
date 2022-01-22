@@ -24,7 +24,7 @@ hello_c: $(BUILDDIR)/hello_c.o
 
 .PHONY: fib
 fib: $(BUILDDIR)/fib.o
-	$(CCLD) -o $(BUILDDIR)/$@ $<
+	$(CC) -o $(BUILDDIR)/$@ $<
 
 .PHONY: maxofthree
 maxofthree: $(BUILDDIR)/maxofthree.o $(SRCDIR)/callmaxofthree.c

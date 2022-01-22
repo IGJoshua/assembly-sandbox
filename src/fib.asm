@@ -27,12 +27,12 @@ print:
     push    rax                 ; caller-save registers
     push    rcx
 
-    mov     rdi, format         ; set first parameter (format)
+    lea     rdi, [rel format]   ; set first parameter (format)
     mov     rsi, rax            ; set second parameter (current_number)
     mov     rax, 0              ; because printf is varargs
 
     ;; Stack is already aligned because we pushed 3 8-byte registers
-    call    printf              ; printf(format, current_number)
+    call    [rel printf wrt ..got] ; printf(format, current_number)
 
     pop     rcx                 ; restore caller-save registers
     pop     rax

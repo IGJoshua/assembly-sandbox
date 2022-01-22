@@ -16,7 +16,7 @@ main:
     sub     rsp, 8              ; must align stack before call
 
     mov     rdi, [rsi]          ; the argument string to display
-    call    puts                ; print it
+    call    [rel puts wrt ..got] ; print it
 
     add     rsp, 8              ; restore %rsp to pre-aligned value
     pop     rsi                 ; restore registers that puts uses

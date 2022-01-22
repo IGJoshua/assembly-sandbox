@@ -32,7 +32,7 @@ maxofthree: $(BUILDDIR)/maxofthree.o $(SRCDIR)/callmaxofthree.c
 
 .PHONY: echo
 echo: $(BUILDDIR)/echo.o
-	$(CCLD) -o $(BUILDDIR)/$@ $<
+	$(CC) -o $(BUILDDIR)/$@ $<
 
 .PHONY: power
 power: $(BUILDDIR)/power.o

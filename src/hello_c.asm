@@ -7,13 +7,15 @@
 ;     nasm -felf64 hola.asm && gcc hola.o && ./a.out
 ; ----------------------------------------------------------------------------------------
 
+    default rel
+
     global main
     extern puts
 
     section .text
 main:                           ; Main is called by the C library
-    lea     rdi, [rel message]  ; First integer arg is in rdi
-    call    [rel puts wrt ..got] ; puts(message)
+    lea     rdi, [message]      ; First integer arg is in rdi
+    call    [puts wrt ..got]    ; puts(message)
                                 ; uses this rel syntax to allow PIE linking
     ret                         ; Return back to the C library
 
